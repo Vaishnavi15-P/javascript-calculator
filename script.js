@@ -35,6 +35,7 @@ function evaluateExpr() {
   }
 }
 
+// Button clicks
 keys.addEventListener('click', (e) => {
   const btn = e.target.closest('button');
   if (!btn) return;
@@ -48,3 +49,17 @@ keys.addEventListener('click', (e) => {
   if (value != null) return append(value);
 });
 
+// ✅ Keyboard support
+document.addEventListener('keydown', (e) => {
+  const allowedKeys = '0123456789+-*/.%';
+  
+  if (allowedKeys.includes(e.key)) {
+    append(e.key);
+  } else if (e.key === 'Enter') {
+    evaluateExpr();
+  } else if (e.key === 'Backspace') {
+    delOne();
+  } else if (e.key === 'Escape') {
+    clearAll();
+  }
+});
